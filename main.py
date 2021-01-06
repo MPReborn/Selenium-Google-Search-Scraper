@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.chrome.options import Options
 
 # First, gets the desired search param from command line arguments. Defaults to "how to use selenium" for demonstration purposes.
 short_commands = "hs:"
@@ -21,7 +22,9 @@ for argument, value in arguments:
     elif argument in ("-s", "--search"):
         query = value
 
-driver = webdriver.Chrome()
+driver_options = Options()
+driver_options.add_argument("--headless")
+driver = webdriver.Chrome(options=driver_options)
 driver.get("https://www.google.com/")
 search = driver.find_element_by_name("q")
 search.send_keys(query)
