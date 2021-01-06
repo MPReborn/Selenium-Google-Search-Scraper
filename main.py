@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions
 # First, gets the desired search param from command line arguments. Defaults to "how to use selenium" for demonstration purposes.
 short_commands = "hs:"
 long_commands = ["help", "search="]
-querry = "how to use selenium"
+query = "how to use selenium"
 try:
     arguments, _ = getopt.getopt(sys.argv[1:], short_commands, long_commands)
 except getopt.error as err:
@@ -19,12 +19,12 @@ for argument, value in arguments:
         print (" Use the -s or --search argument to customize your search. \n Example: \n py main.py -s \"how to tie a tie\"")
         sys.exit()
     elif argument in ("-s", "--search"):
-        querry = value
+        query = value
 
 driver = webdriver.Chrome()
 driver.get("https://www.google.com/")
 search = driver.find_element_by_name("q")
-search.send_keys(querry)
+search.send_keys(query)
 search.send_keys(Keys.RETURN)
 try:
     WebDriverWait(driver, 2).until(
